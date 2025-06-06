@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_fastapi_harness_sample_1749173463103-pr-trigger-input-set
+  identifier: Build_fastapi_harness_sample_1749173463103prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_fastapi_harness_sample_1749173463103
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
