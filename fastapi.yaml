@@ -1,0 +1,57 @@
+# Kubernetes API version for Deployments
+apiVersion: apps/v1
+# Kind of object we are creating
+kind: Deployment
+metadata:
+  # Name of the Deployment
+  name: fastapi-harness-deployment
+spec:
+  # Number of replica Pods to run
+  replicas: 2
+  # Selector to identify which Pods to manage
+  selector:
+    matchLabels:
+      app: fastapi-harness-app
+  # Template for the Pods that will be created
+  template:
+    metadata:
+      # Labels to apply to the Pods
+      labels:
+        app: fastapi-harness-app
+    spec:
+      # Definition of the containers running in the Pod
+      containers:
+      - name: fastapi-container
+        # IMPORTANT: Replace this with the path to your actual container image
+        # This image should be pushed to a container registry like Docker Hub, GCR, or ECR.
+        image: dannykiselev/dannykiselev-repo:v1
+        # The port that the container exposes
+        ports:
+        - containerPort: 80
+---
+# Separator for the next resource definition in the same file
+# ---
+# Kubernetes API version for Services
+apiVersion: v1
+# Kind of object we are creating
+kind: Service
+metadata:
+  # Name of the Service
+  name: fastapi-harness-service
+spec:
+  # This makes the service accessible from outside the cluster (e.g., via a cloud provider's load balancer)
+  # For local testing, you might use NodePort or ClusterIP
+  type: LoadBalancer
+  # Selector to identify which Pods will receive traffic from this service
+  # This must match the labels on the Pods defined in the Deployment
+  selector:
+    app: fastapi-harness-app
+  # Port mapping for the service
+  ports:
+    # The protocol for the port
+  - protocol: TCP
+    # The port on the service that will forward traffic
+    port: 80
+    # The port on the Pods that the traffic will be forwarded to
+    targetPort: 80
+
