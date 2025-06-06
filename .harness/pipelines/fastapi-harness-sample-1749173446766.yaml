@@ -43,6 +43,16 @@ pipeline:
                     shell: Sh
                     command: pytest
                     intelligenceMode: false
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: account.DOCKE
+                    repo: dannykiselev/dannykiselev-repo
+                    tags:
+                      - v1
+                    caching: true
           caching:
             enabled: true
             paths: []
