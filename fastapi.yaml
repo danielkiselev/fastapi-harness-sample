@@ -39,9 +39,9 @@ metadata:
   # Name of the Service
   name: fastapi-harness-service
 spec:
-  # This makes the service accessible from outside the cluster (e.g., via a cloud provider's load balancer)
-  # For local testing, you might use NodePort or ClusterIP
-  type: LoadBalancer
+  # Use NodePort to expose the service on a static port on each of the cluster's nodes.
+  # This is ideal for local development with Minikube.
+  type: NodePort
   # Selector to identify which Pods will receive traffic from this service
   # This must match the labels on the Pods defined in the Deployment
   selector:
@@ -54,4 +54,3 @@ spec:
     port: 80
     # The port on the Pods that the traffic will be forwarded to
     targetPort: 80
-
