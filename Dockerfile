@@ -27,4 +27,4 @@ EXPOSE 80
 # Define the command to run your application
 # This command starts the Uvicorn server, which will serve your FastAPI application.
 # --host 0.0.0.0 is crucial for making the container accessible from the host machine.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
