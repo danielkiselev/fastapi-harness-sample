@@ -30,16 +30,24 @@ pipeline:
                   identifier: Install_Dependencies
                   spec:
                     shell: Sh
-                    command: sudo apt-get update && sudo apt-get install -y python3-dev && sudo apt-get install default-libmysqlclient-dev
+                    command: |-
+                      sudo apt-get update && sudo apt-get install -y python3-dev && sudo apt-get install default-libmysqlclient-dev
+                      pip install --cache-dir .pip_cache -r requirements.txt
+                    envVariables:
+                      PIP_CACHE_DIR: /root/.cache
               - step:
                   type: Run
-                  name: pip install
-                  identifier: pip
+                  name: Pytest
+                  identifier: Pytest
                   spec:
                     shell: Sh
                     command: |
-                      pip install -r requirements.txt
-                  timeout: 10m
+                      pytest test_main.py --junit-xml=output-test.xml
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - output-test.xml
               - step:
                   type: Test
                   name: Testing
