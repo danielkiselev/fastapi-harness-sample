@@ -36,37 +36,13 @@ pipeline:
                     envVariables:
                       PIP_CACHE_DIR: /root/.cache
               - step:
-                  type: Run
-                  name: Pytest
-                  identifier: Pytest
-                  spec:
-                    shell: Sh
-                    command: |
-                      pytest test_main.py --junit-xml=output-test.xml
-                    reports:
-                      type: JUnit
-                      spec:
-                        paths:
-                          - output-test.xml
-              - step:
                   type: Test
-                  name: Testing
+                  name: Test
                   identifier: Test_1
                   spec:
                     shell: Sh
-                    command: "pytest "
+                    command: pytest
                     intelligenceMode: true
-              - step:
-                  type: BuildAndPushDockerRegistry
-                  name: Build and Push to DockerHub
-                  identifier: Build_and_Push_to_DockerHub
-                  spec:
-                    connectorRef: account.DOCKE
-                    repo: dannykiselev/dannykiselev-repo
-                    tags:
-                      - "1.0"
-                    caching: true
-            rollbackSteps: []
           caching:
             enabled: true
             paths: []
