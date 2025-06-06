@@ -33,31 +33,26 @@ pipeline:
                     command: sudo apt-get update && sudo apt-get install -y python3-dev && sudo apt-get install default-libmysqlclient-dev
               - step:
                   type: Run
-                  name: pip
+                  name: pip install
                   identifier: pip
                   spec:
                     shell: Sh
-                    command: |
-                      pip download --cache-dir .pip_cache -r requirements.txt
-              - step:
-                  type: Run
-                  name: Run Unit Tests
-                  identifier: Run_Unit_Tests
-                  spec:
-                    shell: Sh
-                    command: pip install -r requirements.txt --cache-dir .pip_cache
-              - step:
-                  type: Run
-                  name: Pytest
-                  identifier: Pytest
-                  spec:
-                    shell: Sh
-                    command: "pytest "
+                    command: pip install -r requirements.txt
               - step:
                   type: Test
-                  name: Test_1
+                  name: Testing
                   identifier: Test_1
                   spec:
                     shell: Sh
                     command: "pytest "
                     intelligenceMode: true
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push to DockerHub
+                  identifier: Build_and_Push_to_DockerHub
+                  spec:
+                    connectorRef: account.DOCKE
+                    repo: dannykiselev/dannykiselev-repo
+                    tags:
+                      - "1.0"
+                    caching: true
