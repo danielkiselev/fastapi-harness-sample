@@ -41,8 +41,6 @@ pipeline:
                       python -m venv env-name
                       source env-name/bin/activate
                       pip install -r requirements.txt
-                    connectorRef: account.harnessImage
-                    image: alpine
                   timeout: 10m
               - step:
                   type: Test
@@ -69,6 +67,3 @@ pipeline:
           buildIntelligence:
             enabled: true
         description: ""
-  description: This pipeline was updated by Harness AI on 2025-06-06 19:43:30 UTC.
-  tags:
-    ai_generated: "true"
