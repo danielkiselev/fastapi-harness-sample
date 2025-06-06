@@ -42,7 +42,7 @@ pipeline:
                   spec:
                     shell: Sh
                     command: pytest
-                    intelligenceMode: false
+                    intelligenceMode: true
               - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_1
