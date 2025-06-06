@@ -56,3 +56,9 @@ pipeline:
                     tags:
                       - "1.0"
                     caching: true
+          caching:
+            enabled: true
+            paths: []
+          buildIntelligence:
+            enabled: true
+        description: ""
