@@ -38,7 +38,7 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |
-                      python3 -m venv env-name
+                      python -m venv env-name
                       source env-name/bin/activate
                       pip install -r requirements.txt
                     connectorRef: account.harnessImage
