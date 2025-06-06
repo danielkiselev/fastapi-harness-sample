@@ -42,7 +42,7 @@ pipeline:
                   spec:
                     shell: Sh
                     command: pytest
-                    intelligenceMode: true
+                    intelligenceMode: false
           caching:
             enabled: true
             paths: []
