@@ -25,10 +25,10 @@ COPY ./app /app/app
 
 # Expose port 80. This informs Docker that the container listens on this port.
 # This matches the containerPort in your Kubernetes manifest.
-EXPOSE 80
+EXPOSE 8080
 
 # The command to run when the container starts.
 # This starts the Uvicorn server to run your FastAPI application.
 # --host 0.0.0.0 makes the server accessible from outside the container.
 # --port 80 tells Uvicorn to listen on the port we exposed.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
