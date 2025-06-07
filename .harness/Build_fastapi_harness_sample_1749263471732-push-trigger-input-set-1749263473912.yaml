@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_fastapi_harness_sample_1749263471732-push-trigger-input-set
+  identifier: Build_fastapi_harness_sample_1749263471732pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_fastapi_harness_sample_1749263471732
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
