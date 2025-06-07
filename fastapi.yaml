@@ -22,12 +22,11 @@ spec:
       # Definition of the containers running in the Pod
       containers:
       - name: fastapi-container
-        # IMPORTANT: Replace this with the path to your actual container image
-        # This image should be pushed to a container registry like Docker Hub, GCR, or ECR.
+        # IMPORTANT: This image should be available to your Minikube cluster.
         image: dannykiselev/dannykiselev-repo:v1
-        # The port that the container exposes
+        # The port that the container exposes. Updating for consistency.
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 ---
 # Separator for the next resource definition in the same file
 # ---
@@ -40,7 +39,6 @@ metadata:
   name: fastapi-harness-service
 spec:
   # Use NodePort to expose the service on a static port on each of the cluster's nodes.
-  # This is ideal for local development with Minikube.
   type: NodePort
   # Selector to identify which Pods will receive traffic from this service
   # This must match the labels on the Pods defined in the Deployment
@@ -50,7 +48,7 @@ spec:
   ports:
     # The protocol for the port
   - protocol: TCP
-    # The port on the service that will forward traffic
+    # The port on the service itself
     port: 80
-    # The port on the Pods that the traffic will be forwarded to
-    targetPort: 80
+    # THE FIX: Point to the port the application is ACTUALLY running on inside the container.
+    targetPort: 8080
